@@ -15,6 +15,7 @@ engine = create_engine('sqlite:///db/concerts.db', echo=True)
 # class Concert(Base):
 #     pass
 
+# Band has many Concerts, a Venue has many Concerts, and a Concert belongs to a Band and to a Venue.
 class Band(Base):
     __tablename__ = 'bands'
 
@@ -34,6 +35,20 @@ class Venue(Base):
     title = Column(String())
     city = Column(String())
 
-    
     def __repr__(self):
-        return f'Venue: {self.title}'
+        return f'Venue: {self.name}'
+    
+
+class Concert(Base):
+    __tablename__ = 'concerts'
+
+    id = Column(Integer, primary_key=True)
+    date = Column(String())
+    band_id = Column(Integer, ForeignKey('bands.id'))
+    venue_id = Column(Integer, ForeignKey('venues.id'))
+
+    band = relationship('Band', backref=backref('concerts', uselist=True, cascade='delete,all'))
+    venue = relationship('Venue', backref=backref('concerts', uselist=True, cascade='delete,all'))
+
+    def __repr__(self):
+        return f'Concert: {self.date}'
