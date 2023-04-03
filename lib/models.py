@@ -50,5 +50,10 @@ class Concert(Base):
     band = relationship('Band', backref=backref('concerts', uselist=True, cascade='delete,all'))
     venue = relationship('Venue', backref=backref('concerts', uselist=True, cascade='delete,all'))
 
+    def band_name(self):
+        return self.band.name
+
+    
+
     def __repr__(self):
         return f'Concert: {self.date}'
