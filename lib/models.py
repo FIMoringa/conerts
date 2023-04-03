@@ -27,6 +27,9 @@ class Band(Base):
     def __repr__(self):
         return f'Band: {self.name}'
 
+    def concerts(self):
+        return self.concerts
+
 
 class Venue(Base):
     __tablename__ = 'venues'
@@ -43,6 +46,8 @@ class Venue(Base):
 
     def bands(self):
         return self.bands
+
+    
 
 class Concert(Base):
     __tablename__ = 'concerts'
