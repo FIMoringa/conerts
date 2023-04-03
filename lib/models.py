@@ -41,6 +41,9 @@ class Venue(Base):
     def concerts(self):
         return self.concerts
 
+    def bands(self):
+        return self.bands
+
 class Concert(Base):
     __tablename__ = 'concerts'
 
