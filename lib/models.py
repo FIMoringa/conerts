@@ -53,7 +53,8 @@ class Concert(Base):
     def band_name(self):
         return self.band.name
 
-    
+    def venue_name(self):
+        return self.venue.title
 
     def __repr__(self):
         return f'Concert: {self.date}'
