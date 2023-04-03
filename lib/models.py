@@ -30,6 +30,9 @@ class Band(Base):
     def concerts(self):
         return self.concerts
 
+    def venues(self):
+        return self.venues
+
 
 class Venue(Base):
     __tablename__ = 'venues'
