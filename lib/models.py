@@ -79,6 +79,25 @@ class Band(Base):
             introductions.append(
                 f'Hello {concert.venue.city}!!!!! We are {self.name} and we are from {self.hometown}')
         return introductions
+
+    # Band most_performances() class method
+# returns the Band instance for the band that has played the most concerts
+# Note: solving this using only SQLAlchemy methods is possible, but difficult. Feel free to use regular Python enumerable methods here.
+
+    @classmethod
+    def most_performances(cls):
+        most_performances = 0
+        most_performances_band = None
+        for band in cls.query.all():
+            if len(band.concerts) > most_performances:
+                most_performances = len(band.concerts)
+                most_performances_band = band
+        return most_performances_band
+
+
+
+
+
 class Venue(Base):
     __tablename__ = 'venues'
 
