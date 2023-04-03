@@ -38,6 +38,8 @@ class Venue(Base):
     def __repr__(self):
         return f'Venue: {self.name}'
     
+    def concerts(self):
+        return self.concerts
 
 class Concert(Base):
     __tablename__ = 'concerts'
