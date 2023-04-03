@@ -25,6 +25,10 @@ class Band(Base):
     name = Column(String())
     hometown = Column(String())
 
+    concerts = relationship('Concert', backref='band')
+
+    venues = relationship('Venue', backref='band')
+
     def __repr__(self):
         return f'Band: {self.name}'
 
@@ -38,17 +42,12 @@ class Band(Base):
 # Concert hometown_show()
 # returns true if the concert is in the band's hometown, false if it is not
 
-
-  
-
     def upcoming_shows(self):
         upcoming_shows = []
         for concert in self.concerts:
             if concert.date > datetime.now():
                 upcoming_shows.append(concert)
         return upcoming_shows
-
-
 
     # Band play_in_venue(venue, date)
 # takes a venue (Venue instance) and date (as a string) as arguments
@@ -84,9 +83,6 @@ class Band(Base):
         return most_performances_band
 
 
-
-
-
 class Venue(Base):
     __tablename__ = 'venues'
 
@@ -97,6 +93,8 @@ class Venue(Base):
 
     band = relationship('Band', backref=backref(
         'venues', uselist=True, cascade='delete,all'))
+
+    concerts = relationship('Concert', backref='venue')
 
     def __repr__(self):
         return f'Venue: {self.name}'
@@ -158,7 +156,7 @@ class Concert(Base):
             return True
         else:
             return False
-    
+
     #    Concert introduction()
 # returns a string with the band's introduction for this concert
 # an introduction is in the form:
