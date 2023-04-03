@@ -39,11 +39,7 @@ class Band(Base):
 # returns true if the concert is in the band's hometown, false if it is not
 
 
-    def hometown_show(self):
-        for concert in self.concerts:
-            if concert.venue.city == self.hometown:
-                return True
-        return False
+  
 
     def upcoming_shows(self):
         upcoming_shows = []
@@ -52,14 +48,7 @@ class Band(Base):
                 upcoming_shows.append(concert)
         return upcoming_shows
 
-#    Concert introduction()
-# returns a string with the band's introduction for this concert
-# an introduction is in the form:
-# "Hello {insert venue city}!!!!! We are {insert band name} and we're from
-# {insert band hometown}"
 
-    def introduction(self):
-        return f'Hello {self.concerts[0].venue.city}!!!!! We are {self.name} and we are from {self.hometown}'
 
     # Band play_in_venue(venue, date)
 # takes a venue (Venue instance) and date (as a string) as arguments
@@ -163,3 +152,18 @@ class Concert(Base):
 
     def __repr__(self):
         return f'Concert: {self.date}'
+
+    def hometown_show(self):
+        if self.band.hometown == self.venue.city:
+            return True
+        else:
+            return False
+    
+    #    Concert introduction()
+# returns a string with the band's introduction for this concert
+# an introduction is in the form:
+# "Hello {insert venue city}!!!!! We are {insert band name} and we're from
+# {insert band hometown}"
+
+    def introduction(self):
+        return f'Hello {self.venue.city}!!!!! We are {self.band.name} and we are from {self.band.hometown}'
