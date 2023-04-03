@@ -61,7 +61,24 @@ class Band(Base):
     def introduction(self):
         return f'Hello {self.concerts[0].venue.city}!!!!! We are {self.name} and we are from {self.hometown}'
 
+    # Band play_in_venue(venue, date)
+# takes a venue (Venue instance) and date (as a string) as arguments
+# creates a new concert for the band in that venue on that date
 
+    def play_in_venue(self, venue, date):
+        concert = Concert(date=date, band=self, venue=venue)
+        return concert
+
+# Band all_introductions()
+# returns an array of strings representing all the introductions for this band
+# each introduction is in the form:
+
+    def all_introductions(self):
+        introductions = []
+        for concert in self.concerts:
+            introductions.append(
+                f'Hello {concert.venue.city}!!!!! We are {self.name} and we are from {self.hometown}')
+        return introductions
 class Venue(Base):
     __tablename__ = 'venues'
 
