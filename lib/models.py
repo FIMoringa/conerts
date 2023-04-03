@@ -128,6 +128,19 @@ class Venue(Base):
             if concert.date == date:
                 return concert
 
+# Venue most_frequent_band()
+# returns the band with the most concerts at the venue
+# Note: solving this using only SQLAlchemy methods is possible, but difficult. Feel free to use regular Python enumerable methods here.
+
+    def most_frequent_band(self):
+        most_frequent_band = None
+        most_frequent_band_count = 0
+        for concert in self.concerts:
+            if concert.band.name not in most_frequent_band:
+                most_frequent_band_count += 1
+                most_frequent_band = concert.band.name
+        return most_frequent_band
+
 
 class Concert(Base):
     __tablename__ = 'concerts'
