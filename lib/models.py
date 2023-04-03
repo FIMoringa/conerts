@@ -118,6 +118,16 @@ class Venue(Base):
     def bands(self):
         return self.bands
 
+        # Venue
+# Venue concert_on(date)
+# takes a date (string) as argument
+# finds and returns the first concert on that date at that venue
+
+    def concert_on(self, date):
+        for concert in self.concerts:
+            if concert.date == date:
+                return concert
+
 
 class Concert(Base):
     __tablename__ = 'concerts'
